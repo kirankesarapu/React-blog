@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import dummyimg from "../assets/dummyimg.jpg";
+import kiran from "../assets/kiran_k.jpeg";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_URL } from "../config";
 import axios from "axios";
 import { Button, Flex, Form, Input, Upload, message } from "antd";
+import { getUserLocal } from "../utils";
 
 const BlogContent = () => {
   const { id } = useParams();
   const isAddPage = !id;
+  const isAdmin = getUserLocal().custom_type === "admin";
 
   const [state, setState] = useState({});
   const [editMode, setEditMode] = useState(isAddPage ?? false);
@@ -108,7 +110,7 @@ const BlogContent = () => {
       <div className="blog-wrapper">
         <div className="content">
           <Flex style={{ width: "100%" }} justify="flex-end">
-            {!isAddPage && (
+            {!isAddPage && isAdmin && (
               <Button
                 onClick={() => setEditMode(!editMode)}
                 style={{ marginBottom: 20 }}
@@ -184,20 +186,12 @@ const BlogContent = () => {
           )}
         </div>
         <div className="Author_data">
-          <img
-            src={
-              state?.attributes?.authorImage?.data?.attributes?.url
-                ? `${API_URL}${state?.attributes?.authorImage?.data?.attributes?.url}`
-                : dummyimg
-            }
-            alt="Author"
-            className="AuthorImage"
-          />
+          <img src={kiran} alt="Author" className="AuthorImage" />
           <div className="AuthorDescription">
             <p>
-              <strong>{state?.attributes?.authorName}</strong>
+              <strong>Kiran Kesarapu</strong>
             </p>
-            <p>{state?.attributes?.authorDescription}</p>
+            <p>Welcome everyone i'm super excited to showcase my blog.</p>
           </div>
         </div>
       </div>
