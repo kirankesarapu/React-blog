@@ -10,7 +10,7 @@ import { getUserLocal } from "../utils";
 const BlogContent = () => {
   const { id } = useParams();
   const isAddPage = !id;
-  const isAdmin = getUserLocal().custom_role === "admin";
+  const isAdmin = getUserLocal()?.custom_role === "admin";
 
   const [state, setState] = useState({});
   const [editMode, setEditMode] = useState(isAddPage ?? false);
